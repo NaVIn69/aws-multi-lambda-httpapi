@@ -1,0 +1,39 @@
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: aws-serverless-express-api
+
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  # Uncomment to easily set up a custom domain. Read the docs for more details:
+  # https://www.serverless.com/framework/docs/providers/aws/guide/domains
+  # domain: api.example.com
+
+functions:
+  getusers:
+    handler: functions/getusers.handler
+    events:
+      - httpApi:
+          method: get
+          path: /users/{id}
+
+  createuser:
+    handler: functions/createuser.handler
+    events:
+      - httpApi:
+          method: post
+          path: /users
+  updateuser:
+    handler: functions/updateuser.handler
+    events:
+      - httpApi:
+          method: put
+          path: /users/{id}
+          
+  deleteuser:
+    handler: functions/deleteuser.handler
+    events:
+      - httpApi:
+          method: delete
+          path: /users/{id}
